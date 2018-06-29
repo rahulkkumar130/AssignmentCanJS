@@ -1,0 +1,5 @@
+<can-import from="home/">
+  {{#if isResolved}}
+    <home-page></home-page>
+  {{/if}}
+</can-import>

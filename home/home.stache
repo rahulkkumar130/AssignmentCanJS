@@ -1,0 +1,106 @@
+<can-import from="steal-canjs-assignment/home/home.less"/>
+
+<h2>{{greeting}}</h2>
+<div class="select-field-container">
+<label>Select Fields:(CTRL+Click or CTRL+A)</label>
+ {{#if fields.length}}
+<select values:bind='selectedFields' multiple>
+ {{#each fields}}
+      <option value='{{name}}'>{{header}}}</option>      
+       {{/each}}
+    </select>
+    
+    {{/if}}
+</div>
+
+<div class="show-report-btn"><button on:el:click="showReport()">Show Report</button></div>
+
+
+<table class='table'>
+    <thead>
+      <tr>
+      {{#each headers}}
+      <th>{{this}}</th> 
+      {{/each}}
+      </tr>
+    </thead>
+    <tbody>
+    {{#if items.isPending}}
+      <tr class="info"><td colspan="10">Loading</td></tr>
+    {{/if}}
+    {{#if items.isResolved}}
+      {{#if items.value.length}}
+        {{#each items.value}}
+        <tr>
+        
+        {{#if scope.root.checkIfFieldSelected('Id')}}
+           <td class="align-right"> {{Id}} </td>
+        {{/if}}
+       
+         
+        {{#if scope.root.checkIfFieldSelected('Description')}}
+           <td>  {{Description}} </td>
+        {{/if}}
+       
+         
+        {{#if scope.root.checkIfFieldSelected('MAC')}}
+           <td> {{MAC}} </td>
+        {{/if}}
+       
+         
+        {{#if scope.root.checkIfFieldSelected('SerialNumber')}}
+           <td> {{SerialNumber}}</td>
+        {{/if}}
+        
+        
+        {{#if scope.root.checkIfFieldSelected('Platform')}}
+           <td> {{Platform}} </td>
+        {{/if}}
+       
+          
+        {{#if scope.root.checkIfFieldSelected('User')}}
+            <td> {{User}} </td>
+        {{/if}}
+       
+           
+        {{#if scope.root.checkIfFieldSelected('AssignedSignId')}}
+           <td>  {{AssignedSignId}}  </td>
+        {{/if}}
+       
+           
+        {{#if scope.root.checkIfFieldSelected('AssignedSignPath')}}
+          <td>  {{AssignedSignPath}} </td>
+        {{/if}}
+       
+               
+        {{#if scope.root.checkIfFieldSelected('Temperature')}}
+           <td class="align-right"> {{Temperature}} </td> 
+        {{/if}}
+       
+       
+        {{#if scope.root.checkIfFieldSelected('MBMVersion')}}
+            <td> {{MBMVersion}} </td> 
+        {{/if}}
+       
+        
+        {{#if scope.root.checkIfFieldSelected('FirmwareVersion')}}
+          <td>  {{FirmwareVersion}}</td>
+        {{/if}}
+        
+        </tr>
+        {{/each}}
+      {{else}}
+        <tr class="warning"><td colspan="10">No items</td></tr>
+      {{/if}}
+    {{/if}}
+    
+    {{#if items.isRejected}}
+      <tr class="danger">
+      	<td colspan="10">Error: {{items.reason.responseJSON.message}}!</td>
+  	  </tr>
+    {{/if}}
+    </tbody>
+  </table>
+
+
+
